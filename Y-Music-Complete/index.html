@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#060709">
+  <title>Y-Music</title>
+  <link rel="icon" id="app-favicon" href="https://i.pinimg.com/736x/cb/9e/29/cb9e29fe8ad55421b6a0b621e095cd05.jpg">
+  <link rel="apple-touch-icon" id="app-apple-icon" href="https://i.pinimg.com/736x/cb/9e/29/cb9e29fe8ad55421b6a0b621e095cd05.jpg">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <img id="brand-icon" src="https://i.pinimg.com/736x/cb/9e/29/cb9e29fe8ad55421b6a0b621e095cd05.jpg" alt="Y-Music">
+        <span id="brand-name">Y-MUSIC</span>
+        <span class="ver-tag" id="brand-ver">V3.0</span>
+      </div>
+      <div class="status-row">
+        <button class="pill active" id="btn-nonstop"><span class="led on" id="led-nonstop"></span>NON-STOP</button>
+        <button class="pill" id="btn-rec"><span class="led" id="led-rec"></span>REC</button>
+        <button class="pill" id="btn-shield"><span class="led cyan"></span>SHIELD</button>
+        <button class="pill" id="btn-notice"><span class="led red" id="led-notice"></span>NOTICE</button>
+      </div>
+    </header>
+
+    <div class="mini-bar">
+      <div class="mini-meta">
+        <div class="mini-title" id="m-title">READY</div>
+        <div class="mini-sub" id="m-sub">Y-MUSIC STUDIO ENGINE</div>
+      </div>
+      <button class="btn primary" id="m-play" style="width:74px;height:30px">PLAY</button>
+    </div>
+
+    <main class="workspace">
+      <!-- COL 1: SINGLE FLAGSHIP DECK -->
+      <section class="col m-active" data-mcol="deck">
+        <div class="col-head">
+          <span>DECK 01 // FLAGSHIP UNIT</span>
+          <div class="head-actions">
+            <button class="mini-btn" id="btn-view-mode">DISC / EMBED</button>
+            <button class="mini-btn active" id="btn-hifi">HI-FI ON</button>
+          </div>
+        </div>
+        <div class="col-body">
+          <div class="deck-stage">
+            <div class="disc-wrap" id="disc-wrap">
+              <div class="disc" id="disc">
+                <div class="disc-marker"></div>
+                <img class="disc-art" id="disc-art" src="https://i.pinimg.com/736x/cb/9e/29/cb9e29fe8ad55421b6a0b621e095cd05.jpg" alt="">
+                <div class="disc-spindle"></div>
+              </div>
+            </div>
+            <div class="embed-box" id="embed-box"></div>
+
+            <div class="track-meta">
+              <div class="track-title" id="t-title">NO TRACK LOADED</div>
+              <div class="track-artist" id="t-artist">SELECT TRACK OR PASTE URL</div>
+            </div>
+
+            <div class="wave-wrap" id="wave-wrap">
+              <canvas id="wave-canvas"></canvas>
+            </div>
+
+            <div class="time-row">
+              <span id="t-cur">00:00</span>
+              <span id="t-mode">STANDBY</span>
+              <span id="t-dur">00:00</span>
+            </div>
+
+            <div class="btn-row">
+              <button class="btn" id="btn-prev">PREV</button>
+              <button class="btn primary" id="btn-play">PLAY</button>
+              <button class="btn danger" id="btn-stop">STOP</button>
+              <button class="btn" id="btn-brake">BRAKE</button>
+              <button class="btn" id="btn-next">NEXT</button>
+            </div>
+
+            <div class="cue-grid">
+              <button class="btn" data-cue="0">CUE 1</button>
+              <button class="btn" data-cue="1">CUE 2</button>
+              <button class="btn" data-cue="2">CUE 3</button>
+              <button class="btn" data-cue="3">CUE 4</button>
+            </div>
+
+            <div class="loop-grid">
+              <button class="btn" data-loop="2">LOOP 2S</button>
+              <button class="btn" data-loop="4">LOOP 4S</button>
+              <button class="btn" data-loop="8">LOOP 8S</button>
+              <button class="btn" id="btn-loop-off">EXIT</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COL 2: MIXER & HI-FI DSP -->
+      <section class="col" data-mcol="mixer">
+        <div class="col-head">
+          <span>MIXER // HI-FI DSP</span>
+          <span id="dsp-label">STUDIO HI-FI</span>
+        </div>
+        <div class="col-body">
+          <div class="vu-meter"><div class="vu-fill" id="vu-fill"></div></div>
+
+          <div class="fader-group">
+            <div class="fader-row"><label>GAIN</label><input type="range" id="f-vol" min="0" max="1" step="0.01" value="0.85"><span id="v-vol">85%</span></div>
+            <div class="fader-row"><label>PITCH</label><input type="range" id="f-pitch" min="0.5" max="1.5" step="0.01" value="1"><span id="v-pitch">1.00x</span></div>
+            <div class="fader-row"><label>HIGH</label><input type="range" id="f-hi" min="-12" max="12" step="0.5" value="0"><span id="v-hi">0dB</span></div>
+            <div class="fader-row"><label>MID</label><input type="range" id="f-mid" min="-12" max="12" step="0.5" value="0"><span id="v-mid">0dB</span></div>
+            <div class="fader-row"><label>LOW</label><input type="range" id="f-low" min="-12" max="12" step="0.5" value="0"><span id="v-low">0dB</span></div>
+            <div class="fader-row"><label>FILTER</label><input type="range" id="f-flt" min="-1" max="1" step="0.02" value="0"><span id="v-flt">OFF</span></div>
+            <div class="fader-row"><label>ECHO</label><input type="range" id="f-echo" min="0" max="0.7" step="0.02" value="0"><span id="v-echo">0%</span></div>
+          </div>
+
+          <div class="section-label">MASTERING PRESETS</div>
+          <div class="preset-grid" id="preset-grid"></div>
+
+          <div class="section-label">SAMPLER FX</div>
+          <div class="fx-grid">
+            <button class="btn" data-fx="horn">AIR HORN</button>
+            <button class="btn" data-fx="sub">SUB DROP</button>
+            <button class="btn" data-fx="laser">LASER</button>
+            <button class="btn" data-fx="siren">SIREN</button>
+            <button class="btn" data-fx="clap">CLAP</button>
+            <button class="btn" data-fx="hat">HAT ROLL</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- COL 3: SEARCH / PLAYLIST / EXPORT -->
+      <section class="col" data-mcol="library">
+        <div class="tabs">
+          <button class="tab active" data-ltab="search">SEARCH / URL</button>
+          <button class="tab" data-ltab="playlist">PLAYLIST</button>
+          <button class="tab" data-ltab="export">EXPORT</button>
+        </div>
+
+        <!-- TAB: SEARCH & URL -->
+        <div class="col-body" data-lpanel="search">
+          <div class="search-box">
+            <input class="inp" id="search-inp" placeholder="URL (YT / Spotify / SC / Audio) or Keyword">
+            <button class="btn primary" id="btn-go" style="padding:0 12px">GO</button>
+            <button class="btn" id="btn-paste" style="padding:0 8px">PASTE</button>
+          </div>
+          <div class="chip-row" id="provider-row">
+            <button class="chip active" data-prov="audius">AUDIUS FULL</button>
+            <button class="chip" data-prov="itunes">ITUNES</button>
+            <label class="chip" style="cursor:pointer">LOCAL FILE<input type="file" id="local-file" accept="audio/*" multiple hidden></label>
+          </div>
+          <div class="chip-row" id="genre-row"></div>
+          <div class="list" id="search-list"></div>
+        </div>
+
+        <!-- TAB: PLAYLIST -->
+        <div class="col-body" data-lpanel="playlist" style="display:none">
+          <div class="search-box">
+            <input class="inp" id="pl-name" placeholder="New playlist name">
+            <button class="btn primary" id="btn-pl-add" style="padding:0 10px">CREATE</button>
+          </div>
+          <div class="chip-row" id="pl-chips"></div>
+          <div class="pl-actions">
+            <button class="btn primary" id="btn-pl-play" style="flex:1">PLAY ALL</button>
+            <button class="btn" id="btn-pl-shuf">SHUFFLE</button>
+            <button class="btn danger" id="btn-pl-del">DELETE</button>
+          </div>
+          <div class="list" id="pl-list"></div>
+        </div>
+
+        <!-- TAB: EXPORT -->
+        <div class="col-body" data-lpanel="export" style="display:none">
+          <div class="card">
+            <div class="card-title">CURRENT TRACK EXPORT (HI-FI WAV)</div>
+            <p class="card-desc">現在のEQ・Hi-Fiマスタリング設定を適用して、16-bit/44.1kHz 高音質WAVとして書き出しダウンロードします。</p>
+            <button class="btn primary" id="btn-exp-cur">RENDER &amp; DOWNLOAD WAV</button>
+          </div>
+          <div class="card">
+            <div class="card-title">LIVE DJ SESSION RECORDER</div>
+            <p class="card-desc">スクラッチ・EQ・サンプラーFXを含めたリアルタイム出力を録音し、停止時に自動で保存します。</p>
+            <button class="btn" id="btn-exp-rec">START / STOP LIVE REC</button>
+          </div>
+          <div class="card">
+            <div class="card-title">LOCAL AUDIO CONVERTER</div>
+            <p class="card-desc">ローカルの音声ファイル（MP3/M4A/OGG/WAV等）に現在のHi-Fi DSPを適用してWAV変換します。</p>
+            <label class="btn" style="cursor:pointer">SELECT AUDIO FILE<input type="file" id="conv-file" accept="audio/*" hidden></label>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bnav">
+      <button class="active" data-mnav="deck">DECK</button>
+      <button data-mnav="mixer">MIXER</button>
+      <button data-mnav="library">LIBRARY</button>
+    </nav>
+  </div>
+
+  <div class="modal-bg" id="modal-bg">
+    <div class="modal">
+      <div class="modal-head">
+        <span id="modal-title">SYSTEM</span>
+        <button class="mini-btn" id="modal-close">CLOSE</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">
+    <img id="toast-icon" src="https://i.pinimg.com/736x/cb/9e/29/cb9e29fe8ad55421b6a0b621e095cd05.jpg" alt="">
+    <span id="toast-msg"></span>
+  </div>
+
+  <script src="./js/security.js"></script>
+  <script src="./js/url-parser.js"></script>
+  <script src="./js/audio-engine.js"></script>
+  <script src="./js/visualizer.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

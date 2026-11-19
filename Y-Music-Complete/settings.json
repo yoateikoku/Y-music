@@ -1,0 +1,105 @@
+{
+  "app": {
+    "name": "Y-Music",
+    "version": "3.0.0",
+    "theme": "industrial-dark",
+    "accentColor": "#00e5ff",
+    "defaultIcon": "https://i.pinimg.com/736x/cb/9e/29/cb9e29fe8ad55421b6a0b621e095cd05.jpg",
+    "favicon": "https://i.pinimg.com/736x/cb/9e/29/cb9e29fe8ad55421b6a0b621e095cd05.jpg"
+  },
+  "playback": {
+    "nonStopMode": true,
+    "autoPlayNext": true,
+    "repeatMode": "all",
+    "shuffle": false,
+    "keepWakeLock": true,
+    "defaultVolume": 0.85,
+    "vinylBrakeDurationMs": 850,
+    "loopLengthsSec": [
+      2,
+      4,
+      8
+    ]
+  },
+  "audio": {
+    "hifiEnabled": true,
+    "defaultPreset": "STUDIO HI-FI",
+    "presets": {
+      "STUDIO HI-FI": {
+        "sub": 3.5,
+        "pres": 2.0,
+        "air": 3.0,
+        "thresh": -14,
+        "ratio": 3.5
+      },
+      "CLUB BASS": {
+        "sub": 7.5,
+        "pres": 1.0,
+        "air": 2.0,
+        "thresh": -18,
+        "ratio": 5.0
+      },
+      "CLEAR VOCAL": {
+        "sub": 0.5,
+        "pres": 4.5,
+        "air": 2.5,
+        "thresh": -12,
+        "ratio": 2.5
+      },
+      "LOUDNESS": {
+        "sub": 5.0,
+        "pres": 3.0,
+        "air": 4.0,
+        "thresh": -20,
+        "ratio": 6.0
+      },
+      "FLAT": {
+        "sub": 0.0,
+        "pres": 0.0,
+        "air": 0.0,
+        "thresh": -6,
+        "ratio": 1.5
+      }
+    }
+  },
+  "visualizer": {
+    "enabled": true,
+    "mode": "rainbow-spectrum",
+    "fftSize": 256,
+    "smoothing": 0.82
+  },
+  "search": {
+    "defaultProvider": "audius",
+    "timeoutMs": 8000,
+    "cacheTtlSec": 300,
+    "quickGenres": [
+      "Phonk",
+      "Lo-Fi",
+      "EDM",
+      "J-Pop",
+      "House",
+      "Techno"
+    ]
+  },
+  "security": {
+    "dosShieldEnabled": true,
+    "rateLimitWindowMs": 10000,
+    "maxRequestsPerWindow": 20,
+    "blockContextMenu": true,
+    "blockDevToolsShortcuts": true
+  },
+  "notifications": [
+    {
+      "id": "ym-300",
+      "date": "2026-11-19",
+      "title": "Y-Music v3.0 Complete Edition",
+      "body": "GitHub Pages / Cloudflare Pages 対応のモジュール分割構成へ完全アップデートしました。URL自動抽出、Hi-Fi DSP、虹色スペクトラム背景、プレイリスト、WAV書き出し＆LIVE録音がすべて利用可能です。"
+    },
+    {
+      "id": "ym-url-guide",
+      "date": "2026-11-19",
+      "title": "URL直接読み込みガイド",
+      "body": "YouTube / Shorts / Music、Spotify（/intl-ja/対応）、Apple Music、SoundCloud、ニコニコ動画、音声直リンクをそのまま貼り付けて再生できます。"
+    }
+  ]
+}
